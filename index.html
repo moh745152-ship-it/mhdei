@@ -1,35 +1,79 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MHDEI | شحن ألعاب</title>
+<title>MHDEI | متجر شحن موثوق</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#000;color:#fff;text-align:center}
+body{
+margin:0;
+font-family:Arial, Tahoma;
+background:#000;
+color:#fff;
+text-align:center;
+animation:fadeIn 1.2s ease
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
 h1{font-size:38px;margin:15px}
 h2{margin-top:30px}
 p{opacity:.9;font-size:16px}
-hr{width:85%;border:1px solid #333;margin:30px auto}
+hr{border:1px solid #333;margin:30px auto;width:85%}
 
 /* التطبيقات */
-.apps{display:flex;justify-content:center;gap:20px;margin:20px}
-.app{background:#5b4db7;padding:15px;border-radius:15px;width:150px}
-.app img{width:100%;height:80px;object-fit:contain}
+.apps{display:flex;justify-content:center;gap:20px;margin:30px}
+.app{
+background:#5b4db7;
+padding:20px;
+border-radius:15px;
+width:160px;
+cursor:pointer;
+transition:.4s
+}
+.app:hover{transform:scale(1.08);box-shadow:0 0 20px #5b4db7}
+.app img{width:100%;height:90px;object-fit:contain}
 .app span{display:block;margin-top:10px;font-weight:bold}
+
+/* نص اختيار */
+.choose{color:#ccc;font-size:18px;animation:blink 2s infinite}
+@keyframes blink{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
+
+/* الحقول */
+input,select,button{
+width:85%;
+padding:14px;
+margin:10px;
+border-radius:10px;
+border:none;
+font-size:16px
+}
+button{
+background:red;
+color:#fff;
+cursor:pointer;
+transition:.3s
+}
+button:hover{transform:scale(1.05);background:#ff2d2d}
 
 /* كروت */
 .card{
-background:#111;width:85%;margin:15px auto;
-padding:15px;border-radius:12px
+background:#111;
+padding:15px;
+border-radius:12px;
+width:85%;
+margin:10px auto
 }
 
-/* النموذج */
-input,select,button{
-width:85%;padding:14px;margin:10px;
-border-radius:10px;border:none;font-size:16px
+/* شارات */
+.badges span{
+display:inline-block;
+margin:5px;
+padding:6px 12px;
+border-radius:20px;
+background:#222;
+font-size:14px
 }
-button{background:red;color:#fff;font-size:20px;cursor:pointer}
 
 /* واتساب */
 .whatsapp{
@@ -37,156 +81,109 @@ display:block;width:85%;margin:20px auto;
 padding:15px;background:#25D366;color:#fff;
 border-radius:12px;text-decoration:none;font-size:20px
 }
+.whatsapp:hover{box-shadow:0 0 15px #25D366}
 
-/* نجوم */
-.stars{color:gold;font-size:24px}
-
-/* تعليقات */
-.comment{
-background:#111;padding:12px;border-radius:10px;
-margin:10px auto;width:85%;text-align:right
-}
-
-/* منبثق */
-.popup{
-position:fixed;top:0;left:0;right:0;bottom:0;
-background:rgba(0,0,0,.85);
-display:flex;align-items:center;justify-content:center
-}
-.popup-box{
-background:#111;padding:25px;border-radius:15px;width:85%
-}
+.stars{color:gold;font-size:22px}
+.hidden{display:none}
 </style>
 </head>
 
 <body>
 
-<!-- عرض -->
-<div class="popup" id="popup">
-<div class="popup-box">
-<h2>🎁 عرض خاص</h2>
-<p>كوبون خصم: <b>MHDEI10</b></p>
-<button onclick="closePopup()">تم</button>
-</div>
-</div>
-
 <h1>MHDEI</h1>
-<p>شحن ألعاب بسرعة وأمان</p>
+<p>متجر شحن ألعاب آمن وسريع</p>
+
+<div class="badges">
+<span>✔ موثوق</span>
+<span>🔒 آمن</span>
+<span>⚡ سريع</span>
+<span>🏆 رسمي</span>
+</div>
 
 <div class="apps">
-<div class="app">
-<img src="https://upload.wikimedia.org/wikipedia/en/9/9f/PUBG_Mobile_Logo.png">
+<div class="app" onclick="showSection('pubg')">
+<img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/9/9f/PUBG_Mobile_Logo.png">
 <span>PUBG Mobile</span>
 </div>
-<div class="app">
-<img src="https://upload.wikimedia.org/wikipedia/en/6/6c/Garena_Free_Fire_Logo.png">
+
+<div class="app" onclick="showSection('ff')">
+<img loading="lazy" src="https://upload.wikimedia.org/wikipedia/en/6/6c/Garena_Free_Fire_Logo.png">
 <span>Free Fire</span>
 </div>
 </div>
 
+<div class="choose">⬆️ انقر على لعبة للشحن</div>
 <hr>
 
 <div class="card">✔️ شحن مضمون 100%</div>
-<div class="card">⚠️ لا نطلب كلمة المرور أبدًا</div>
-<div class="card">📜 نلتزم بسياسة الخصوصية</div>
+<div class="card">⚠️ ليبيانا فقط</div>
+<div class="card">🔒 لا نطلب كلمة المرور</div>
 
-<hr>
-
-<h2>نموذج الشحن</h2>
-
-<form id="orderForm" action="https://formsubmit.co/moh745152@gmail.com" method="POST">
-<input type="hidden" name="_captcha" value="false">
-
-<input required name="name" placeholder="اسمك">
-<input required name="phone" placeholder="رقم هاتفك">
-<input required name="player_id" placeholder="ID اللاعب">
-
-<select id="game" name="game" required>
-<option value="">اختر اللعبة</option>
-<option value="pubg">PUBG</option>
-<option value="ff">Free Fire</option>
+<!-- PUBG -->
+<div id="pubg" class="hidden">
+<h2>PUBG Mobile</h2>
+<form onsubmit="return confirmOrder(this)">
+<input type="hidden" name="order_id">
+<input required placeholder="اسمك">
+<input required placeholder="رقمك (ليبيانا فقط)">
+<input required placeholder="ID اللاعب">
+<select required>
+<option>60 UC = 11.696 د.ل</option>
+<option>325 UC = 59.024 د.ل</option>
+<option>660 UC = 118.184 د.ل</option>
 </select>
-
-<select id="amount" name="amount" required>
-<option value="">اختر الكمية</option>
-</select>
-
-<input name="coupon" placeholder="كوبون خصم (اختياري)">
-
-<button type="submit">إرسال الطلب</button>
+<button>تأكيد الطلب</button>
+<button type="reset">إعادة تعيين</button>
 </form>
+</div>
 
-<a class="whatsapp" href="https://wa.me/218945598244" target="_blank">
-💬 تواصل واتساب
-</a>
+<!-- FF -->
+<div id="ff" class="hidden">
+<h2>Free Fire</h2>
+<form onsubmit="return confirmOrder(this)">
+<input type="hidden" name="order_id">
+<input required placeholder="اسمك">
+<input required placeholder="رقمك (ليبيانا فقط)">
+<input required placeholder="ID اللاعب">
+<select required>
+<option>100 جوهرة = 12.900 د.ل</option>
+<option>210 جوهرة = 25.200 د.ل</option>
+<option>530 جوهرة = 62.500 د.ل</option>
+</select>
+<button>تأكيد الطلب</button>
+<button type="reset">إعادة تعيين</button>
+</form>
+</div>
+
+<a class="whatsapp" href="https://wa.me/218945598244">💬 دعم فني واتساب</a>
 
 <hr>
-
-<h2>طريقة الشحن</h2>
-<p>1 - اختر اللعبة</p>
-<p>2 - اختر الكمية</p>
-<p>3 - أدخل ID</p>
-<p>4 - أدخل رقم الهاتف</p>
-<p>5 - أرسل الطلب</p>
-<p>6 - حوّل الرصيد</p>
-<p>7 - يتم الشحن</p>
-
-<p><b>📞 التحويل إلى:</b> 0945598244</p>
-
-<hr>
-
-<h2>وقت العمل</h2>
+<h2>⏰ وقت العمل</h2>
 <p>من 1 صباحًا حتى 8 مساءً</p>
 
 <hr>
-
 <h2>تقييم العملاء</h2>
 <div class="stars">★★★★★</div>
-<p>5.0 / 5</p>
-
-<div class="comment">
-<div class="stars">★★★★★</div>
-سريع وخدمة ممتازة 🔥
-</div>
-
-<div class="comment">
-<div class="stars">★★★★★</div>
-تم الشحن في أقل من 5 دقائق
-</div>
+<p>5 / 5</p>
 
 <hr>
-
-<h2>سياسة الموقع</h2>
-<p>نحترم خصوصية المستخدم ولا نشارك البيانات.</p>
-<p>الزبون مسؤول عن إدخال ID الصحيح.</p>
-<p>يتم الشحن بعد تأكيد الدفع.</p>
-<p>الموقع غير تابع رسميًا لشركات الألعاب.</p>
+<h2>السياسة والخصوصية</h2>
+<p>نحترم خصوصية المستخدم – لا نحتفظ بالبيانات</p>
+<p>العميل مسؤول عن صحة المعلومات</p>
 
 <script>
-/* عرض */
-setTimeout(()=>{document.getElementById("popup").style.display="flex"},800);
-function closePopup(){document.getElementById("popup").style.display="none";}
+function showSection(id){
+document.getElementById("pubg").classList.add("hidden");
+document.getElementById("ff").classList.add("hidden");
+document.getElementById(id).classList.remove("hidden");
+}
 
-/* الأسعار */
-const amount=document.getElementById("amount");
-document.getElementById("game").onchange=function(){
-amount.innerHTML='<option value="">اختر الكمية</option>';
-if(this.value==="pubg"){
-amount.innerHTML+=`
-<option>UC 60 - 11.6 د.ل</option>
-<option>UC 325 - 59 د.ل</option>
-<option>UC 660 - 118 د.ل</option>
-<option>UC 1800 - 295 د.ل</option>`;
-}
-if(this.value==="ff"){
-amount.innerHTML+=`
-<option>100 جوهرة</option>
-<option>300 جوهرة</option>
-<option>1000 جوهرة</option>
-<option>2100 جوهرة</option>`;
-}
+function confirmOrder(form){
+let id = "MH-" + Math.floor(Math.random()*100000);
+alert("✅ تم استلام طلبك\nرقم الطلب: "+id+"\nسيتم الشحن قريبًا");
+return false;
 }
 </script>
 
 </body>
-  </html>
+                                 </html>
